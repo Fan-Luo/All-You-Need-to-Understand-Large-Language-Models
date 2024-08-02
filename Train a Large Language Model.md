@@ -2,6 +2,7 @@
 Large Language Models (LLMs) are deep learning models trained on vast amounts of text data to understand and generate human language. They are built on architectures like Transformers, which have proven effective in capturing the complexities of language, including syntax, semantics, and context. These models are characterized by their large number of parameters, often running into billions, which allow them to learn rich representations of language.
 
 ## Model Pre-training
+By pre-training with a very large, unlabeled set of textual data, such as Wikipedia. LM models develops a statistical understanding of the language it has been trained on. They benefit from the vast quantities of textual data, without the cost of labeling using self-supervised learning. 
 
 ###  Typical Pre-training Architectures
 
@@ -42,9 +43,33 @@ LLMs are often trained on large amounts of raw text in a self-supervised fashion
 
 In CLM, the model only considers words to the left, while MLM considers words to the left and right. Therefore, CLM is unidirectional and MLM is bidirectional. For both of the two tasks, there is no single correct answer for the [MASK] prediction / completion. Instead of using classification metrics, the evaluation is based on the distribution of the text prediction. The common metrics for evaluation are cross-entropy loss and perplexity (PPL, also equivalent to the exponential of cross-entropy loss). 
 
-Mmore auxiliary objectives for pre-training language models include Next Sentence Prediction (NSP), Sentence Order Prediction (SOP), Capital Word Prediction (CWP), Sentence Deshuffling (SDS), Sentence distance prediction (SDP), Masked Column Prediction (MCP), Discourse Relation Prediction (DRP), Translation Language Modeling (TLM), Information Retrieval Relevance (IRR), etcs.
+More auxiliary objectives for pre-training language models include 
+ - Next Sentence Prediction (NSP)
+ - Sentence Order Prediction (SOP)
+ - Capital Word Prediction (CWP)
+ - Sentence Deshuffling (SDS)
+ - Sentence distance prediction (SDP)
+ - Masked Column Prediction (MCP)
+ - Discourse Relation Prediction (DRP)
+ - Translation Language Modeling (TLM)
+ - Information Retrieval Relevance (IRR), etcs.
 
 
 ## Supervised Fine-Tuning (SFT)
+After pre-training, the model undergoes SFT to improve its ability to follow instructions and generate high-quality responses:
+
+Curated datasets: Smaller, high-quality datasets with human-written prompts and responses.
+
+Task-specific training: The model learns to generate appropriate responses to various prompts and instructions.
+
+Continued learning: SFT builds upon the pre-trained model's knowledge, refining its capabilities for specific tasks.
+
 
 ## Reinforcement Learning (RL)
+The final stage often involves RL techniques to further align the model with human preferences:
+
+Reward modeling: A separate model is trained to predict human preferences for generated responses.
+
+Policy optimization: The language model is fine-tuned using the reward model's feedback, optimizing for human-preferred outputs.
+
+Techniques like Proximal Policy Optimization (PPO) or Constitutional AI may be employed.
